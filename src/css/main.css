@@ -59,6 +59,11 @@ header {
   max-height: 330px;
   margin: 0 auto;
 }
+
+.task-to-do h2 {
+  text-align: center;
+}
+
 .btn-add {
   position: fixed;
   bottom: 20px;
