@@ -1,12 +1,16 @@
 {
   "name": "prod-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Platzi Master challenge # 1 - Productive App",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "live server --watch"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Juan Camilo Garcés <camo0402@gmail.com> -- Leonardo Rincón Botache <jleobotache@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  }
 }
