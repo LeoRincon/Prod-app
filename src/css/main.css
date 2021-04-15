@@ -39,6 +39,14 @@ header {
   height: 45px;
 }
 
+.btn-statistics {
+  height: 30px;
+  width: 80px;
+  border: none;
+  background-color: #456268;
+  color: #fff;
+  border-radius: 15px;
+}
 /*********************styles of main******************/
 
 .main-container__description {
@@ -53,11 +61,20 @@ header {
 }
 
 .task-to-do {
-  background-color: bisque;
+  background-color: #fcf8ec;
   width: 90%;
   height: auto;
   max-height: 330px;
   margin: 0 auto;
+  border-radius: 20px;
+  overflow-y: scroll;
+}
+
+.card-item {
+  width: 95%;
+  border: 1px solid #000;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .task-to-do h2 {
@@ -66,10 +83,14 @@ header {
 
 .btn-add {
   position: fixed;
-  bottom: 20px;
+  bottom: 2px;
   width: 90%;
   height: 40px;
+  border: none;
+  background-color: #456268;
+  color: #fff;
   border-radius: 15px;
+  font-size: 20px;
 }
 
 /********************* Modal ******************/
@@ -126,6 +147,24 @@ header {
   width: 90%;
   height: 90%;
   margin: 0 auto;
+}
+
+.card-body h4 {
+  font-size: 18px;
+}
+.card-body h4 span {
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.btn__delete-task {
+  width: 70px;
+  height: 30px;
+  border: none;
+  border-radius: 15px;
+  background-color: #456268;
+  color: #fff;
+  margin-top: 10px;
 }
 
 .form-group {
