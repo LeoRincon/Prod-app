@@ -1,0 +1,67 @@
+:root {
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  width: 100vw;
+  height: 80px;
+  background-color: #d0e8f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*********************styles of header******************/
+.logo-container {
+  display: flex;
+  width: 70%;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+}
+.logo-container h1 {
+  width: 80%;
+  height: 40px;
+  font-size: 22px;
+  padding-top: 6px;
+  margin-left: 5px;
+}
+.logo img {
+  width: 45px;
+  height: 45px;
+}
+
+/*********************styles of main******************/
+
+.main-container__description {
+  width: 90%;
+  height: auto;
+  text-align: center;
+  margin: 20px 10px;
+}
+.task-contanier {
+  /*contenedor de las task-cards*/
+  max-height: 350px;
+}
+
+.task-to-do {
+  background-color: bisque;
+  width: 90%;
+  height: auto;
+  max-height: 330px;
+  margin: 0 auto;
+}
+.btn-add {
+  position: fixed;
+  bottom: 20px;
+  width: 90%;
+  height: 40px;
+  border-radius: 15px;
+}
