@@ -12,6 +12,7 @@ body {
 header {
   width: 100vw;
   height: 80px;
+  position: relative;
   background-color: #d0e8f2;
   display: flex;
   justify-content: center;
@@ -64,4 +65,83 @@ header {
   width: 90%;
   height: 40px;
   border-radius: 15px;
+}
+
+/********************* Modal ******************/
+.modal-cantainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.452);
+}
+.modal-visivility {
+  opacity: 0;
+  visibility: hidden;
+}
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: #fff;
+  width: 90%;
+  max-width: 320px;
+  min-width: 280px;
+  height: 350px;
+  transition: transform 1s;
+  transform: translateY(0%);
+}
+
+.modal-close {
+  transform: translateY(-200%);
+}
+
+.card-container {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-header h4 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.card-body {
+  width: 90%;
+  height: 90%;
+  margin: 0 auto;
+}
+
+.form-group {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+}
+.form-group input {
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
+  font-size: 18px;
+}
+
+.btn-primary,
+.btn-close--modal {
+  width: 90px;
+  height: 40px;
+  border: none;
+  background-color: #456268;
+  border-radius: 15px;
+  margin-left: 17px;
+  margin-top: 20px;
 }
