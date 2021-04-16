@@ -32,19 +32,20 @@ document.getElementById("task-form").addEventListener("submit", function (e) {
   // Getting Form Values
   const name = document.getElementById("name").value,
     status = document.getElementById("status").value,
-    time = document.getElementById("time").value;
+    time = document.getElementById("time").value,
+    description = document.getElementById("description").value;
 
   // Create a new Oject Product
-  const task = new Task(name, status, time);
+  const task = new Task(name, status, time, description);
   // debugger;
 
   // Create a new UI instance
   const ui = new UI();
 
   // Input User Validation
-  if (name === "" || status === "" || time === "") {
-    return ui.showMessage("Please Insert data in all fields", "danger");
-  }
+  // if (name === "" || status === "" || time === "") {
+  //   return ui.showMessage("Please Insert data in all fields", "danger");
+  // }
 
   // Save Product
   ui.addTask(task);

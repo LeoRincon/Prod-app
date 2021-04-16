@@ -10,6 +10,7 @@ export class UI {
                     <h4>task: <span>${task.name}</span></h4> 
                     <h4>status: <span>${task.status}</span></h4> 
                     <h4>time: <span>${task.time}</span></h4>
+                    <h4>Description: <span>${task.description}</span></h4>
                     <button type="button" class="btn__delete-task" name="delete">Delete</button>
                 </div>
             </div>
