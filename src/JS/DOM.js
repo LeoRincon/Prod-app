@@ -4,7 +4,7 @@ export class UI {
   addTask(task) {
     const taskList = document.getElementById("task-list");
     const element = document.createElement("div");
-    taskList.innerHTML = `
+    element.innerHTML = `
                 <div class="card-body">
                     <h4>task: <span>${task.name}</span></h4> 
                     <h4>status: <span>${task.status}</span></h4> 
