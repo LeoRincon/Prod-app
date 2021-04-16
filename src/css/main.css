@@ -162,7 +162,12 @@ header {
 .card-body {
   width: 90%;
   height: 90%;
-  margin: 0 auto;
+  margin: 15px auto;
+  padding: 10px;
+  background-color: var(--color-light);
+  box-shadow: -3px 2px 20px 0px #d2c3c3;
+  border-radius: 20px;
+  cursor: move;
 }
 
 .card-body h4 {
@@ -183,6 +188,22 @@ header {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+/* ********* Styles Drag and Drop ****** */
+
+.task-list--wrap.taskSelect div:nth-child(1) {
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 0px 0px 20px reba(149, 153, 159, 0.16);
+}
+
+.task-list--wrap.fantasma div:nth-child(1) {
+  border: 1px solid var(--color-dark);
+}
+
+.task-list--wrap.drag div:nth-child(1) {
+  opacity: 0;
+}
+
+/* ************ Styles Form */
 
 .form-group {
   width: 100%;

@@ -103,3 +103,34 @@ document.getElementById("task-list").addEventListener("click", (e) => {
   ui.deleteTask(e.target);
   e.preventDefault();
 });
+
+//*************************** Drag and Drop  */
+
+const listTask = document.getElementById("task-list");
+
+console.log(listTask);
+
+Sortable.create(listTask, {
+  animation: 150,
+  chosenClass: "taskSelect",
+  ghostClass: "fantasma",
+  dragClass: "drag",
+
+  onEnd: () => {
+    console.log("se cambio el orden");
+  },
+
+  group: "listask",
+  store: {
+    set: (sortable) => {
+      const orden = sortable.toArray();
+      console.log(orden);
+      localStorage.setItem(sortable.options.group.name, orden.join("|"));
+    },
+
+    get: (sortable) => {
+      const orden = localStorage.getItem(sortable.options.group.name);
+      return orden ? orden.split("|") : [];
+    },
+  },
+});
