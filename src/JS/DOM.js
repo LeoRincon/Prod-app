@@ -4,8 +4,7 @@ export class UI {
   addTask(task) {
     const taskList = document.getElementById("task-list");
     const element = document.createElement("div");
-    element.innerHTML = `
-            <div class="card-item">
+    taskList.innerHTML = `
                 <div class="card-body">
                     <h4>task: <span>${task.name}</span></h4> 
                     <h4>status: <span>${task.status}</span></h4> 
@@ -13,7 +12,6 @@ export class UI {
                     <h4>Description: <span>${task.description}</span></h4>
                     <button type="button" class="btn__delete-task" name="delete">Delete</button>
                 </div>
-            </div>
         `;
     taskList.appendChild(element);
   }
@@ -30,18 +28,18 @@ export class UI {
   }
 
   showMessage(message, cssClass) {
-    // const div = document.createElement("div");
-    // div.className = `alert alert-${cssClass} mt-2`;
-    // div.appendChild(document.createTextNode(message));
-    // // Show in The DOM
-    // const container = document.querySelector(".container");
-    // const app = document.querySelector("#App");
-    // // Insert Message in the UI
-    // container.insertBefore(div, app);
-    // // Remove the Message after 3 seconds
-    // let timeMessageSucces = 3000;
-    // setTimeout(function () {
-    //   document.querySelector(".alert").remove();
-    // }, timeMessageSucces);
+    const div = document.createElement("div");
+    div.className = `alert alert-${cssClass} mt-2`;
+    div.appendChild(document.createTextNode(message));
+    // Show in The DOM
+    const container = document.querySelector(".card-container");
+    const app = document.querySelector("#task-form");
+    // Insert Message in the UI
+    container.insertBefore(div, app);
+    // Remove the Message after 3 seconds
+    let timeMessageSucces = 3000;
+    setTimeout(function () {
+      document.querySelector(".alert").remove();
+    }, timeMessageSucces);
   }
 }
