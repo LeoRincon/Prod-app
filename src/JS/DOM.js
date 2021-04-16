@@ -5,7 +5,7 @@ export class UI {
     const taskList = document.getElementById("task-list");
     const element = document.createElement("div");
     element.classList.add("task-list--wrap");
-    element.setAttribute("data-id", `1`);
+    // element.setAttribute("data-id", `1`);
     element.innerHTML = `
                   <div class="card-body">
                     <h4>task: <span>${task.name}</span></h4> 

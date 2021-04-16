@@ -11,6 +11,7 @@
   "author": "Juan Camilo Garcés <camo0402@gmail.com> -- Leonardo Rincón Botache <jleobotache@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "live-server": "^1.2.1"
+    "live-server": "^1.2.1",
+    "nodemon": "^2.0.7"
   }
 }

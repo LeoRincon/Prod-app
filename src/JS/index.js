@@ -19,6 +19,8 @@ const close_Modal = () => {
   setTimeout(() => {
     ModalContainer.classList.toggle("modal-visivility");
   }, timeModalGo);
+  const ui = new UI();
+  ui.resetForm();
 };
 
 addTask.addEventListener("click", openModal);
@@ -31,6 +33,8 @@ window.addEventListener("click", (e) => {
     setTimeout(() => {
       ModalContainer.classList.toggle("modal-visivility");
     }, timeModalGo);
+    const ui = new UI();
+    ui.resetForm();
   }
 });
 
@@ -116,15 +120,15 @@ Sortable.create(listTask, {
   ghostClass: "fantasma",
   dragClass: "drag",
 
-  onEnd: () => {
-    console.log("se cambio el orden");
-  },
+  // onEnd: () => {
+  //   console.log("se cambio el orden");
+  // },
 
   group: "listask",
   store: {
     set: (sortable) => {
       const orden = sortable.toArray();
-      console.log(orden);
+      // console.log(orden);
       localStorage.setItem(sortable.options.group.name, orden.join("|"));
     },
 
