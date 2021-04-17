@@ -1,0 +1,257 @@
+:root {
+  --color-dark: #456268;
+  --color-blue-light: #d0e8f2;
+  --color-light: #fff;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  width: 100vw;
+  height: 80px;
+  position: relative;
+  background-color: var(--color-blue-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*********************styles of header******************/
+.logo-container {
+  display: flex;
+  width: 70%;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+}
+.logo-container h1 {
+  width: 80%;
+  height: 40px;
+  font-size: 22px;
+  padding-top: 6px;
+  margin-left: 5px;
+}
+.logo img {
+  width: 45px;
+  height: 45px;
+}
+
+.btn-statistics {
+  height: 30px;
+  width: 80px;
+  border: none;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  border-radius: 15px;
+  outline: none;
+}
+
+.btn-statistics:hover {
+  border: 2px solid var(--color-dark);
+  color: var(--color-dark);
+  background-color: var(--color-blue-light);
+}
+/*********************styles of main******************/
+
+.main-container__description {
+  width: 90%;
+  height: auto;
+  text-align: center;
+  margin: 20px 10px;
+}
+.task-contanier {
+  /*contenedor de las task-cards*/
+  max-height: 350px;
+}
+
+.task-to-do {
+  background-color: #fcf8ec;
+  width: 90%;
+  height: auto;
+  max-height: 330px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow-y: scroll;
+}
+
+.task-to-do h2 {
+  text-align: center;
+}
+
+.btn-add {
+  position: fixed;
+  bottom: 2px;
+  width: 90%;
+  height: 40px;
+  border: none;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  border-radius: 15px;
+  font-size: 20px;
+  outline: none;
+}
+
+.btn-add:hover {
+  border: 2px solid var(--color-dark);
+  color: var(--color-dark);
+  background-color: var(--color-blue-light);
+}
+
+/********************* Modal ******************/
+.modal-cantainer,
+.modal-cantainer__statistics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.452);
+}
+.modal-visivility,
+.modal-visivility__statistics {
+  opacity: 0;
+  visibility: hidden;
+}
+.modal,
+.modal-statistics {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: var(--color-light);
+  width: 90%;
+  max-width: 320px;
+  min-width: 280px;
+  height: 400px;
+  transition: transform 1s;
+  transform: translateY(0%);
+}
+.modal-statistics {
+  display: inline-block;
+}
+.modal-close,
+.modal-statistics__close {
+  transform: translateY(-200%);
+}
+
+.card-container {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-header h4 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.card-body {
+  width: 90%;
+  height: 90%;
+  margin: 15px auto;
+  padding: 10px;
+  background-color: var(--color-light);
+  box-shadow: -3px 2px 20px 0px #d2c3c3;
+  border-radius: 20px;
+  cursor: move;
+}
+
+.card-body h4 {
+  font-size: 18px;
+}
+.card-body h4 span {
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.btn__delete-task {
+  width: 70px;
+  height: 30px;
+  border: none;
+  border-radius: 15px;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+/* ********* Styles Drag and Drop ****** */
+
+.task-list--wrap.taskSelect div:nth-child(1) {
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 0px 0px 20px reba(149, 153, 159, 0.16);
+}
+
+.task-list--wrap.fantasma div:nth-child(1) {
+  border: 1px solid var(--color-dark);
+}
+
+.task-list--wrap.drag div:nth-child(1) {
+  opacity: 0;
+}
+
+/* ************ Styles Form */
+
+.form-group {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+}
+.form-group input {
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
+  font-size: 18px;
+}
+
+.btn-primary,
+.btn-close--modal {
+  width: 90px;
+  height: 40px;
+  border: none;
+  background-color: var(--color-dark);
+  border-radius: 15px;
+  margin-left: 17px;
+  margin-top: 10px;
+  outline: none;
+  color: var(--color-light);
+}
+.btn-primary:hover,
+.btn-close--modal:hover,
+.btn__delete-task:hover {
+  border: 2px solid var(--color-dark);
+  color: var(--color-dark);
+  background-color: var(--color-blue-light);
+}
+
+/* ********** Style of validation of the input  */
+
+.alert-danger {
+  color: red;
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
+  font-size: 18px;
+  text-align: center;
+}
+.alert-success {
+  color: green;
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
+  font-size: 18px;
+  text-align: center;
+}

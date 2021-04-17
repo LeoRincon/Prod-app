@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "live server --watch"
+    "start": "live-server ./public/index.html"
   },
   "keywords": [],
   "author": "Juan Camilo Garcés <camo0402@gmail.com> -- Leonardo Rincón Botache <jleobotache@gmail.com>",
