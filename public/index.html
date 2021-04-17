@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../src/css/main.css">
+  <link rel="stylesheet" href="../src/css/tablet.css" media="(min-width: 768px)">
+  <link rel="stylesheet" href="../src/css/desktop.css" media="(min-width: 1024px)">
 </head>
 
 <body>
@@ -31,7 +33,7 @@
         <h2>Task</h2>
 
 
-        <div id="task-list" class="col-md-8"></div>
+        <div id="task-list" class="task-list"></div>
 
 
         <button class="btn-add" id="add_task">Crear Tarea</button>
@@ -61,8 +63,10 @@
             <div class="form-group">
               <input type="text" id="description" step="1" placeholder="Description" class="form-control">
             </div>
-            <input type="submit" value="Save" class="btn btn-primary btn-block">
-            <button class="btn-close--modal" id="close_modal" type="button">Cerrar</button>
+            <div class="btn-modal__task">
+              <input type="submit" value="Save" class="btn btn-primary btn-block">
+              <button class="btn-close--modal" id="close_modal" type="button">Cerrar</button>
+            </div>
           </form>
         </div>
       </div>
