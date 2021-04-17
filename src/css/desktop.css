@@ -1,0 +1,90 @@
+header {
+  height: 120px;
+}
+
+.logo img {
+  width: 80px;
+  height: 80px;
+}
+
+.logo-container h1 {
+  font-size: 3.6rem;
+  padding-top: 6px;
+  margin-left: 25px;
+}
+
+.btn-statistics {
+  height: 50px;
+  width: 160px;
+  font-size: 24px;
+}
+
+.main-container__description p {
+  font-size: 2.8rem;
+}
+
+.task-to-do {
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.task-to-do h2 {
+  font-size: 3.4rem;
+}
+
+.btn-add {
+  width: 80%;
+  height: 60px;
+  font-size: 2.8rem;
+}
+
+.task-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.task-list--wrap {
+  width: 50%;
+}
+
+.card-body {
+  width: 90%;
+}
+
+.card-body h4 {
+  font-size: 2.4rem;
+}
+.card-body h4 span {
+  font-size: 2rem;
+}
+.btn__delete-task {
+  width: 100px;
+  height: 40px;
+  margin-bottom: 0;
+  font-size: 2rem;
+}
+
+/* ********** Styles Modal  */
+
+.modal {
+  max-width: 600px;
+  height: 500px;
+}
+
+.form-group {
+  height: 60px;
+}
+
+.form-group input {
+  font-size: 2.4rem;
+}
+
+.btn-primary,
+.btn-close--modal {
+  width: 120px;
+  height: 50px;
+  font-size: 2.8rem;
+}

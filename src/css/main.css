@@ -12,6 +12,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 header {
   width: 100vw;
   height: 80px;
@@ -33,7 +37,7 @@ header {
 .logo-container h1 {
   width: 80%;
   height: 40px;
-  font-size: 22px;
+  font-size: 2.2rem;
   padding-top: 6px;
   margin-left: 5px;
 }
@@ -63,7 +67,8 @@ header {
   width: 90%;
   height: auto;
   text-align: center;
-  margin: 20px 10px;
+  margin: 20px auto;
+  font-size: 1.6rem;
 }
 .task-contanier {
   /*contenedor de las task-cards*/
@@ -74,7 +79,7 @@ header {
   background-color: #fcf8ec;
   width: 90%;
   height: auto;
-  max-height: 330px;
+  max-height: 390px;
   margin: 0 auto;
   border-radius: 20px;
   overflow-y: scroll;
@@ -82,6 +87,7 @@ header {
 
 .task-to-do h2 {
   text-align: center;
+  font-size: 2rem;
 }
 
 .btn-add {
@@ -93,7 +99,7 @@ header {
   background-color: var(--color-dark);
   color: var(--color-light);
   border-radius: 15px;
-  font-size: 20px;
+  font-size: 2rem;
   outline: none;
 }
 
@@ -131,7 +137,7 @@ header {
   border-radius: 20px;
   background-color: var(--color-light);
   width: 90%;
-  max-width: 320px;
+  max-width: 380px;
   min-width: 280px;
   height: 400px;
   transition: transform 1s;
@@ -154,7 +160,7 @@ header {
 }
 
 .card-header h4 {
-  font-size: 24px;
+  font-size: 2.4rem;
   font-weight: 500;
   margin-bottom: 30px;
 }
@@ -163,7 +169,7 @@ header {
   width: 90%;
   height: 90%;
   margin: 15px auto;
-  padding: 10px;
+  padding: 20px;
   background-color: var(--color-light);
   box-shadow: -3px 2px 20px 0px #d2c3c3;
   border-radius: 20px;
@@ -171,11 +177,11 @@ header {
 }
 
 .card-body h4 {
-  font-size: 18px;
+  font-size: 1.8rem;
 }
 .card-body h4 span {
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 
 .btn__delete-task {
@@ -214,7 +220,7 @@ header {
   width: 100%;
   height: 100%;
   padding: 5px 10px;
-  font-size: 18px;
+  font-size: 1.8rem;
 }
 
 .btn-primary,
@@ -244,7 +250,7 @@ header {
   width: 100%;
   height: 100%;
   padding: 5px 10px;
-  font-size: 18px;
+  font-size: 1.8rem;
   text-align: center;
 }
 .alert-success {
@@ -252,6 +258,6 @@ header {
   width: 100%;
   height: 100%;
   padding: 5px 10px;
-  font-size: 18px;
+  font-size: 1.8rem;
   text-align: center;
 }
