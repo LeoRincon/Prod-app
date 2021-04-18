@@ -89,11 +89,11 @@ window.addEventListener("click", (e) => {
 // DOM Events
 document.getElementById("task-form").addEventListener("submit", function (e) {
   // Override the default Form behaviour
-  // e.preventDefault();
 
   // Getting Form Values
   const name = document.getElementById("name").value,
-    status = document.getElementById("status").value,
+    // status = document.getElementById("status").value,
+    status = false,
     time = document.getElementById("time").value,
     description = document.getElementById("description").value;
 
@@ -102,9 +102,9 @@ document.getElementById("task-form").addEventListener("submit", function (e) {
 
   // Input User Validation
   if (name === "" || status === "" || time === "" || description === "") {
+    e.preventDefault();
     return dom.showMessage("Please Insert data in all fields", "danger");
   }
-
   // Save Task
 
   let key = firebase.database().ref().child("unfinished_task").push().key;
@@ -122,11 +122,11 @@ document.getElementById("task-form").addEventListener("submit", function (e) {
 document.getElementById("task-list").addEventListener("click", (e) => {
   const dom = new DOM();
   dom.deleteTask(e.target);
-  // console.log(e);
+  console.log(e.target);
 
-  const key = e.target.parentElement.parentElement.getAttribute("data-key");
-  var task_to_remove = firebase.database().ref("unfinished_task/" + key);
-  task_to_remove.remove();
+  // const key = e.target.parentElement.parentElement.getAttribute("data-key");
+  // var task_to_remove = firebase.database().ref("unfinished_task/" + key);
+  // task_to_remove.remove();
 
   // e.preventDefault();
 });
