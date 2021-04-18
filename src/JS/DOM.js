@@ -1,9 +1,10 @@
 // UI Constructor
-export class UI {
+export class DOM {
   // Add a new Product
   addTask(task) {
     const taskList = document.getElementById("task-list");
     const element = document.createElement("div");
+    element.setAttribute("data-key", task.key);
     element.classList.add("task-list--wrap");
     // element.setAttribute("data-id", `1`);
     element.innerHTML = `
@@ -12,7 +13,9 @@ export class UI {
                     <h4>status: <span>${task.status}</span></h4> 
                     <h4>time: <span>${task.time}</span></h4>
                     <h4>Description: <span>${task.description}</span></h4>
-                    <button type="button" class="btn__delete-task" name="delete">Delete</button>
+                    <i class="fas fa-pen icons-task icon-edit" id="btn-edit"></i>
+                    <i class="fas fa-check icons-task icon-check" id="btn-finish"></i>
+                    <i class="fas fa-trash icons-task icon-delete" id="btn-edit"></i>
                   </div>
         `;
     taskList.appendChild(element);
@@ -23,7 +26,10 @@ export class UI {
   }
 
   deleteTask(element) {
-    if (element.name === "delete") {
+    if (element.id === "btn-edit") {
+      console.log(element);
+
+      // debugger;
       element.parentElement.parentElement.remove();
       // this.showMessage("Task Deleted Succsssfully", "success");
     }
@@ -44,4 +50,24 @@ export class UI {
       document.querySelector(".alert").remove();
     }, timeMessageSucces);
   }
+
+  // load_tasks() {
+  //   // task_container = document.getElementById("task-list")[0];
+  //   // task_container.innerHTML = "";
+
+  //   const task_array = [];
+  //   firebase
+  //     .database()
+  //     .ref("unfinished_task")
+  //     .once("value", function (snapshot) {
+  //       snapshot.forEach(function (childSnapshot) {
+  //         let childKey = childSnapshot.key;
+  //         let childData = childSnapshot.val();
+  //         task_array.push(Object.values(childData));
+  //       });
+  //       for (let i = 0; i < task_array.length; i++) {
+  //         addTask(task_array[i]);
+  //       }
+  //     });
+  // }
 }

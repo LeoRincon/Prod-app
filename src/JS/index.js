@@ -1,5 +1,18 @@
 import { Task } from "./task.js";
-import { UI } from "./DOM.js";
+import { DOM } from "./DOM.js";
+
+//***** firebase configuration code ***************** */
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBz535g3lAKXWFX_Yj_Y5bbkQtjzuqcdn4",
+  authDomain: "todo-platzimaster.firebaseapp.com",
+  projectId: "todo-platzimaster",
+  storageBucket: "todo-platzimaster.appspot.com",
+  messagingSenderId: "229804248567",
+  appId: "1:229804248567:web:9d033d0f00398511d472f2",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 //***** code of modal task ***************** */
 
@@ -19,8 +32,8 @@ const close_Modal = () => {
   setTimeout(() => {
     ModalContainer.classList.toggle("modal-visivility");
   }, timeModalGo);
-  const ui = new UI();
-  ui.resetForm();
+  const dom = new DOM();
+  dom.resetForm();
 };
 
 addTask.addEventListener("click", openModal);
@@ -33,8 +46,8 @@ window.addEventListener("click", (e) => {
     setTimeout(() => {
       ModalContainer.classList.toggle("modal-visivility");
     }, timeModalGo);
-    const ui = new UI();
-    ui.resetForm();
+    const dom = new DOM();
+    dom.resetForm();
   }
 });
 
@@ -76,7 +89,7 @@ window.addEventListener("click", (e) => {
 // DOM Events
 document.getElementById("task-form").addEventListener("submit", function (e) {
   // Override the default Form behaviour
-  e.preventDefault();
+  // e.preventDefault();
 
   // Getting Form Values
   const name = document.getElementById("name").value,
@@ -84,35 +97,45 @@ document.getElementById("task-form").addEventListener("submit", function (e) {
     time = document.getElementById("time").value,
     description = document.getElementById("description").value;
 
-  // Create a new Oject Product
-  const task = new Task(name, status, time, description);
-  // debugger;
-
-  // Create a new UI instance
-  const ui = new UI();
+  // Create a new DOM instance
+  const dom = new DOM();
 
   // Input User Validation
   if (name === "" || status === "" || time === "" || description === "") {
-    return ui.showMessage("Please Insert data in all fields", "danger");
+    return dom.showMessage("Please Insert data in all fields", "danger");
   }
 
-  // Save Product
-  ui.addTask(task);
-  ui.showMessage("task Added Successfully", "success");
-  ui.resetForm();
+  // Save Task
+
+  let key = firebase.database().ref().child("unfinished_task").push().key;
+  let updates = {};
+  // Create a new Oject Task
+  const task = new Task(key, name, status, time, description);
+  updates["/unfinished_task/" + key] = task;
+  firebase.database().ref().update(updates);
+
+  dom.addTask(task);
+  dom.showMessage("task Added Successfully", "success");
+  dom.resetForm();
 });
 
 document.getElementById("task-list").addEventListener("click", (e) => {
-  const ui = new UI();
-  ui.deleteTask(e.target);
-  e.preventDefault();
+  const dom = new DOM();
+  dom.deleteTask(e.target);
+  // console.log(e);
+
+  const key = e.target.parentElement.parentElement.getAttribute("data-key");
+  var task_to_remove = firebase.database().ref("unfinished_task/" + key);
+  task_to_remove.remove();
+
+  // e.preventDefault();
 });
 
 //*************************** Drag and Drop  */
 
 const listTask = document.getElementById("task-list");
 
-console.log(listTask);
+// console.log(listTask);
 
 Sortable.create(listTask, {
   animation: 150,
@@ -138,3 +161,33 @@ Sortable.create(listTask, {
     },
   },
 });
+
+function load_tasks() {
+  // task_container = document.getElementById("task-list")[0];
+  // task_container.innerHTML = "";
+  const dom = new DOM();
+
+  const task_array = [];
+  firebase
+    .database()
+    .ref("unfinished_task")
+    .once("value", function (snapshot) {
+      snapshot.forEach(function (childSnapshot) {
+        let childKey = childSnapshot.key;
+        let childData = childSnapshot.val();
+        task_array.push(Object.values(childData));
+      });
+      for (let i = 0; i < task_array.length; i++) {
+        let task = new Task(
+          task_array[i][1],
+          task_array[i][2],
+          task_array[i][3],
+          task_array[i][4],
+          task_array[i][0]
+        );
+        dom.addTask(task);
+      }
+    });
+}
+
+load_tasks();

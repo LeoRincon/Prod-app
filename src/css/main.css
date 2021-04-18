@@ -169,7 +169,7 @@ header {
   width: 90%;
   height: 90%;
   margin: 15px auto;
-  padding: 20px;
+  padding: 15px;
   background-color: var(--color-light);
   box-shadow: -3px 2px 20px 0px #d2c3c3;
   border-radius: 20px;
@@ -184,18 +184,18 @@ header {
   font-size: 1.6rem;
 }
 
-.btn__delete-task {
-  width: 70px;
-  height: 30px;
-  border: none;
-  border-radius: 15px;
-  background-color: var(--color-dark);
-  color: var(--color-light);
+.icons-task {
+  font-size: 1.6rem;
+  color: var(--color-dark);
+  margin-left: 25px;
+  text-align: center;
   margin-top: 10px;
-  margin-bottom: 10px;
 }
 /* ********* Styles Drag and Drop ****** */
 
+.task-list--wrap {
+  position: relative;
+}
 .task-list--wrap.taskSelect div:nth-child(1) {
   transform: scale(1.05) rotate(-1deg);
   box-shadow: 0px 0px 20px reba(149, 153, 159, 0.16);
