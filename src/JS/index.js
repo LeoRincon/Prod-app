@@ -3,7 +3,7 @@ import { UI } from "./DOM.js";
 
 //***** firebase configuration code ***************** */
 // Your web app's Firebase configuration
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyBz535g3lAKXWFX_Yj_Y5bbkQtjzuqcdn4",
     authDomain: "todo-platzimaster.firebaseapp.com",
     projectId: "todo-platzimaster",
@@ -110,8 +110,8 @@ document.getElementById("task-form").addEventListener("submit", function(e) {
 
     // Save Task
 
-    var key = firebase.database().ref().child("unfinished_task").push().key;
-    var updates = {};
+    let key = firebase.database().ref().child("unfinished_task").push().key;
+    let updates = {};
     // Create a new Oject Task
     const task = new Task(key, name, status, time, description);
     updates["/unfinished_task/" + key] = task;
@@ -124,7 +124,6 @@ document.getElementById("task-form").addEventListener("submit", function(e) {
 
 document.getElementById("task-list").addEventListener("click", (e) => {
     const ui = new UI();
-    console.log(e);
     ui.deleteTask(e.target);
     const key = e.target.parentElement.parentElement.getAttribute("data-key");
     var task_to_remove = firebase.database().ref("unfinished_task/" + key);
@@ -138,7 +137,7 @@ document.getElementById("task-list").addEventListener("click", (e) => {
 
 const listTask = document.getElementById("task-list");
 
-console.log(listTask);
+// console.log(listTask);
 
 Sortable.create(listTask, {
     animation: 150,
@@ -164,3 +163,24 @@ Sortable.create(listTask, {
         },
     },
 });
+
+function load_tasks() {
+    // task_container = document.getElementById("task-list")[0];
+    // task_container.innerHTML = "";
+    const ui = new UI();
+
+    const task_array = [];
+    firebase.database().ref("unfinished_task").once('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+            let childKey = childSnapshot.key;
+            let childData = childSnapshot.val();
+            task_array.push(Object.values(childData));
+        });
+        for (let i = 0; i < task_array.length; i++) {
+            let task = new Task(task_array[i][1], task_array[i][2], task_array[i][3], task_array[i][4], task_array[i][0]);
+            ui.addTask(task);
+        }
+    });
+}
+
+load_tasks();

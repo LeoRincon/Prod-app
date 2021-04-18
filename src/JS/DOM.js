@@ -46,22 +46,20 @@ export class UI {
         }, timeMessageSucces);
     }
 
-    // load_tasks() {
-    //     // task_container = document.getElementById("task-list")[0];
-    //     // task_container.innerHTML = "";
-    //     const ui = new UI();
+    load_tasks() {
+        // task_container = document.getElementById("task-list")[0];
+        // task_container.innerHTML = "";
 
-    //     var task_array = [];
-    //     firebase.database().ref("unfinished_task").once('value', function(snapshot) {
-    //         snapshot.forEach(function(childSnapshot) {
-    //             var childKey = childSnapshot.key;
-    //             var childData = childSnapshot.val();
-    //             task_array.push(Object.values(childData));
-    //         });
-    //         for (var i, i = 0; i < task_array.length; i++) {
-    //             var taskf_from_array = task_array[i][1]
-    //             ui.addTask(taskf_from_array);
-    //         }
-    //     });
-    // }
+        const task_array = [];
+        firebase.database().ref("unfinished_task").once('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                let childKey = childSnapshot.key;
+                let childData = childSnapshot.val();
+                task_array.push(Object.values(childData));
+            });
+            for (let i = 0; i < task_array.length; i++) {
+                addTask(task_array[i]);
+            }
+        });
+    }
 }
