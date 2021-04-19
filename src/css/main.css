@@ -184,13 +184,24 @@ header {
   font-size: 1.6rem;
 }
 
-.icons-task {
+.icons-task,
+.btn-start__timer {
   font-size: 1.6rem;
   color: var(--color-dark);
-  margin-left: 25px;
+  margin-left: 18px;
   text-align: center;
   margin-top: 10px;
 }
+
+.timer,
+.btn-start__timer {
+  font-size: 1.8rem;
+  margin-left: 15px;
+}
+/* .btn-start__timer{
+  color: var(--color-dark);
+} */
+
 /* ********* Styles Drag and Drop ****** */
 
 .task-list--wrap {

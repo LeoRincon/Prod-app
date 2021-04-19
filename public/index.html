@@ -2,112 +2,112 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productive App</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../src/css/main.css">
-    <link rel="stylesheet" href="../src/css/tablet.css" media="(min-width: 768px)">
-    <link rel="stylesheet" href="../src/css/desktop.css" media="(min-width: 1024px)">
-    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productive App</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/css/main.css">
+  <link rel="stylesheet" href="../src/css/tablet.css" media="(min-width: 768px)">
+  <link rel="stylesheet" href="../src/css/desktop.css" media="(min-width: 1024px)">
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.1/dist/chart.min.js"></script>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productive App</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../src/css/main.css">
-    <link rel="stylesheet" href="../src/css/tablet.css" media="(min-width: 768px)">
-    <link rel="stylesheet" href="../src/css/desktop.css" media="(min-width: 1024px)">
-    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
-    <script src="https://kit.fontawesome.com/b4c36c288f.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.1/dist/chart.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productive App</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/css/main.css">
+  <link rel="stylesheet" href="../src/css/tablet.css" media="(min-width: 768px)">
+  <link rel="stylesheet" href="../src/css/desktop.css" media="(min-width: 1024px)">
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+  <script src="https://kit.fontawesome.com/b4c36c288f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <header>
-        <div class="logo-container">
-            <figure class="logo">
-                <img src="../src/assets/img/icon-logo.svg" alt="logo de productive app">
-            </figure>
-            <h1>Productive App</h1>
-        </div>
+  <header>
+    <div class="logo-container">
+      <figure class="logo">
+        <img src="../src/assets/img/icon-logo.svg" alt="logo de productive app">
+      </figure>
+      <h1>Productive App</h1>
+    </div>
 
-        <button class="btn-statistics" id="btn_statistics">Estadística</button>
-    </header>
-    <main class="main-container">
-        <section class="main-container__description">
-            <p>Organizate con tus tareas.</p>
-        </section>
-        <section class="task-contanier">
-            <div class="task-to-do">
-                <h2>Task</h2>
-
-
-                <div id="task-list" class="task-list"></div>
+    <button class="btn-statistics" id="btn_statistics">Estadística</button>
+  </header>
+  <main class="main-container">
+    <section class="main-container__description">
+      <p>Organizate con tus tareas.</p>
+    </section>
+    <section class="task-contanier">
+      <div class="task-to-do">
+        <h2>Task</h2>
 
 
-                <button class="btn-add" id="add_task">Crear Tarea</button>
+        <div id="task-list" class="task-list"></div>
+
+
+        <button class="btn-add" id="add_task">Crear Tarea</button>
+      </div>
+    </section>
+
+
+    <!-- *************************** Modal add task ********************** -->
+
+    <section class="modal-cantainer modal-visivility">
+
+      <div id="modal" class="modal modal-close">
+        <div class="card-container">
+          <div class="card-header">
+            <h4>Add task</h4>
+          </div>
+          <form id="task-form" class="card-body--form">
+            <div class="form-group">
+              <input type="text" id="name" placeholder="Title task" class="form-control">
             </div>
-        </section>
-
-
-        <!-- *************************** Modal add task ********************** -->
-
-        <section class="modal-cantainer modal-visivility">
-
-            <div id="modal" class="modal modal-close">
-                <div class="card-container">
-                    <div class="card-header">
-                        <h4>Add task</h4>
-                    </div>
-                    <form id="task-form" class="card-body--form">
-                        <div class="form-group">
-                            <input type="text" id="name" placeholder="Title task" class="form-control">
-                        </div>
-                        <!-- <div class="form-group">
+            <!-- <div class="form-group">
               <input type="text" id="status" step="0.01" placeholder="Status" class="form-control">
             </div> -->
-                        <div class="form-group">
-                            <input type="number" id="time" min="15" step="1" placeholder="Time min 15 minutes" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="description" step="1" placeholder="Description" class="form-control">
-                        </div>
-                        <div class="btn-modal__task">
-                            <input type="submit" value="Save" class="btn btn-primary btn-block">
-                            <button class="btn-close--modal" id="close_modal" type="button">Cerrar</button>
-                        </div>
-                    </form>
-                </div>
+            <div class="form-group">
+              <input type="number" id="time" min="15" step="1" placeholder="Time min 15 minutes" class="form-control">
             </div>
-
-        </section>
-
-        <!-- ************************** Modal of  statistics -->
-
-        <section class="modal-cantainer__statistics modal-visivility__statistics">
-            <div class="modal-statistics modal-statistics__close">
-                <div class="head__modal-statistics">
-                    <h2>statistics of tha task</h2>
-                </div>
-                <div class="crad-statistics">
-                    pcuerpo de la estadistica
-                </div>
-                <button class="btn-close--modal-statistics" id="close_modal_statistics" type="button">Cerrar</button>
-                <canvas id="myChart" width="200" height="150"></canvas>
+            <div class="form-group">
+              <input type="text" id="description" step="1" placeholder="Description" class="form-control">
             </div>
+            <div class="btn-modal__task">
+              <input type="submit" value="Save" class="btn btn-primary btn-block">
+              <button class="btn-close--modal" id="close_modal" type="button">Cerrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
 
-        </section>
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-    <script src="../src/JS/index.js" type="module"></script>
-    <script src="../src/JS/char.js"></script>
+    </section>
+
+    <!-- ************************** Modal of  statistics -->
+
+    <section class="modal-cantainer__statistics modal-visivility__statistics">
+      <div class="modal-statistics modal-statistics__close">
+        <div class="head__modal-statistics">
+          <h2>statistics of tha task</h2>
+        </div>
+        <div class="crad-statistics">
+          pcuerpo de la estadistica
+        </div>
+        <button class="btn-close--modal-statistics" id="close_modal_statistics" type="button">Cerrar</button>
+        <canvas id="myChart" width="200" height="150"></canvas>
+      </div>
+
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+  <script src="../src/JS/index.js" type="module"></script>
+  <script src="../src/JS/char.js"></script>
 </body>
 
 </html>
