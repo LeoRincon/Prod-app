@@ -1,5 +1,5 @@
 import { Task } from "./task.js";
-import { UI } from "./DOM.js";
+import { DOM } from "./DOM.js";
 
 //***** firebase configuration code ***************** */
 // Your web app's Firebase configuration
@@ -9,11 +9,10 @@ const firebaseConfig = {
     projectId: "todo-platzimaster",
     storageBucket: "todo-platzimaster.appspot.com",
     messagingSenderId: "229804248567",
-    appId: "1:229804248567:web:9d033d0f00398511d472f2"
+    appId: "1:229804248567:web:9d033d0f00398511d472f2",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
 
 //***** code of modal task ***************** */
 
@@ -33,8 +32,8 @@ const close_Modal = () => {
     setTimeout(() => {
         ModalContainer.classList.toggle("modal-visivility");
     }, timeModalGo);
-    const ui = new UI();
-    ui.resetForm();
+    const dom = new DOM();
+    dom.resetForm();
 };
 
 addTask.addEventListener("click", openModal);
@@ -47,8 +46,8 @@ window.addEventListener("click", (e) => {
         setTimeout(() => {
             ModalContainer.classList.toggle("modal-visivility");
         }, timeModalGo);
-        const ui = new UI();
-        ui.resetForm();
+        const dom = new DOM();
+        dom.resetForm();
     }
 });
 
@@ -90,24 +89,22 @@ window.addEventListener("click", (e) => {
 // DOM Events
 document.getElementById("task-form").addEventListener("submit", function(e) {
     // Override the default Form behaviour
-    e.preventDefault();
 
     // Getting Form Values
     const name = document.getElementById("name").value,
-        status = document.getElementById("status").value,
+        // status = document.getElementById("status").value,
+        status = false,
         time = document.getElementById("time").value,
         description = document.getElementById("description").value;
 
-
-
-    // Create a new UI instance
-    const ui = new UI();
+    // Create a new DOM instance
+    const dom = new DOM();
 
     // Input User Validation
     if (name === "" || status === "" || time === "" || description === "") {
-        return ui.showMessage("Please Insert data in all fields", "danger");
+        e.preventDefault();
+        return dom.showMessage("Please Insert data in all fields", "danger");
     }
-
     // Save Task
 
     let key = firebase.database().ref().child("unfinished_task").push().key;
@@ -117,21 +114,22 @@ document.getElementById("task-form").addEventListener("submit", function(e) {
     updates["/unfinished_task/" + key] = task;
     firebase.database().ref().update(updates);
 
-    ui.addTask(task);
-    ui.showMessage("task Added Successfully", "success");
-    ui.resetForm();
+    dom.addTask(task);
+    dom.showMessage("task Added Successfully", "success");
+    dom.resetForm();
 });
 
 document.getElementById("task-list").addEventListener("click", (e) => {
-    const ui = new UI();
-    ui.deleteTask(e.target);
-    const key = e.target.parentElement.parentElement.getAttribute("data-key");
-    var task_to_remove = firebase.database().ref("unfinished_task/" + key);
-    task_to_remove.remove();
+    const dom = new DOM();
+    dom.deleteTask(e.target);
+    console.log(e.target);
 
-    e.preventDefault();
+    // const key = e.target.parentElement.parentElement.getAttribute("data-key");
+    // var task_to_remove = firebase.database().ref("unfinished_task/" + key);
+    // task_to_remove.remove();
+
+    // e.preventDefault();
 });
-
 
 //*************************** Drag and Drop  */
 
@@ -167,20 +165,29 @@ Sortable.create(listTask, {
 function load_tasks() {
     // task_container = document.getElementById("task-list")[0];
     // task_container.innerHTML = "";
-    const ui = new UI();
+    const dom = new DOM();
 
     const task_array = [];
-    firebase.database().ref("unfinished_task").once('value', function(snapshot) {
-        snapshot.forEach(function(childSnapshot) {
-            let childKey = childSnapshot.key;
-            let childData = childSnapshot.val();
-            task_array.push(Object.values(childData));
+    firebase
+        .database()
+        .ref("unfinished_task")
+        .once("value", function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                let childKey = childSnapshot.key;
+                let childData = childSnapshot.val();
+                task_array.push(Object.values(childData));
+            });
+            for (let i = 0; i < task_array.length; i++) {
+                let task = new Task(
+                    task_array[i][1],
+                    task_array[i][2],
+                    task_array[i][3],
+                    task_array[i][4],
+                    task_array[i][0]
+                );
+                dom.addTask(task);
+            }
         });
-        for (let i = 0; i < task_array.length; i++) {
-            let task = new Task(task_array[i][1], task_array[i][2], task_array[i][3], task_array[i][4], task_array[i][0]);
-            ui.addTask(task);
-        }
-    });
 }
 
 load_tasks();
