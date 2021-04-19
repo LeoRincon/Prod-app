@@ -184,3 +184,144 @@ function load_tasks() {
 }
 
 load_tasks();
+
+// const ctx = document.getElementById('myChart').getContext('2d');
+// const myChart = new Chart(ctx, {
+//     type: 'bar',
+//     data: {
+//         labels: ["Tasks"],
+//         datasets: []
+//     },
+//     options: {
+//         scales: {
+//             yAxes: [{
+//                 ticks: {
+//                     beginAtZero: true
+//                 }
+//             }]
+//         }
+//     }
+// });
+
+// const addData = (chart, label, data) => {
+//     // chart.config.data.datasets.forEach(function(dataset, i) {
+//     //     dataset.data.push({
+//     //         x: label,
+//     //         y: data
+//     //     });
+//     // });
+//     chart.data.labels.push(label);
+//     chart.data.datasets.forEach((dataset, i) => {
+//         dataset.data[0] = (data[0]);
+//     });
+//     chart.update();
+// }
+
+// const removeData = (chart) => {
+//     // chart.data.labels.pop();
+//     // chart.data.labels.pop();
+//     // chart.data.datasets.forEach((dataset) => {
+//     //     dataset.data.pop();
+//     // });
+//     chart.config.data.datasets.forEach(function(dataset) {
+//         dataset.data.pop();
+//         chart.update();
+//     });
+
+// }
+
+// var chartColors = {
+//     red: 'rgb(255, 99, 132)',
+//     orange: 'rgb(255, 159, 64)',
+//     yellow: 'rgb(255, 205, 86)',
+//     green: 'rgb(75, 192, 192)',
+//     blue: 'rgb(54, 162, 235)',
+//     purple: 'rgb(153, 102, 255)',
+//     grey: 'rgb(201, 203, 207)'
+// };
+// var color = Chart.helpers.color;
+// var colorNames = Object.keys(chartColors);
+// const onRefresh = (chart, data, ver) => {
+//     var newColor = chartColors['orange'];
+//     var newDataset = {
+//         label: 'Dataset ' + (ver),
+//         backgroundColor: newColor,
+//         borderColor: chartColors['yellow'],
+//         borderWidth: 1,
+//         data: data
+//     };
+
+//     chart.config.data.datasets.push(newDataset);
+//     chart.update();
+// };
+// let total = 0;
+// firebase.database().ref('unfinished_task').on('value', (snap) => {
+//     const taskFalse = [];
+//     const taskTrue = [];
+//     let obj = snap.val();
+//     for (const prop in obj) {
+//         if (obj[prop]["status"] === "false") {
+//             taskFalse.push(obj);
+//         } else {
+//             taskTrue.push(obj);
+//         }
+//     }
+//     let fals = taskArrayToNumber(taskFalse);
+//     let trues = taskArrayToNumber(taskTrue);
+// });
+var database = firebase.database();
+var starCountRef = firebase.database().ref('unfinished_task/');
+starCountRef.on('value', (snapshot) => {
+    const data = snapshot.val();
+    console.log(data);
+});
+database.ref('unfinished_task').get().then(function(snapshot) {
+    if (snapshot.exists()) {
+        console.log(snapshot.val());
+    } else {
+        console.log("No data available");
+    }
+}).catch(function(error) {
+    console.error(error);
+});
+const taskArrayToNumber = (taskArray) => {
+    return taskArray.length
+}
+
+
+const tasksCanvas = document.getElementById("myChart");
+
+var pendingTasksData = {
+    label: 'Pending tasks',
+    data: [0],
+    backgroundColor: 'rgba(0, 99, 132, 0.6)',
+    borderWidth: 0,
+};
+
+var doneTasksData = {
+    label: 'Done tasks',
+    data: [0],
+    backgroundColor: 'rgba(99, 132, 0, 0.6)',
+    borderWidth: 0,
+};
+
+var tasksData = {
+    labels: ["Tasks"],
+    datasets: [pendingTasksData, doneTasksData]
+};
+
+var chartOptions = {
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    }
+};
+
+var barChart = new Chart(tasksCanvas, {
+    type: 'bar',
+    data: tasksData,
+    options: chartOptions
+});

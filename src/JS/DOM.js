@@ -47,9 +47,6 @@ export class UI {
     }
 
     load_tasks() {
-        // task_container = document.getElementById("task-list")[0];
-        // task_container.innerHTML = "";
-
         const task_array = [];
         firebase.database().ref("unfinished_task").once('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
@@ -62,4 +59,26 @@ export class UI {
             }
         });
     }
+
+    task_done(task, task_tool) {
+        // finished_task_container = document.getElementsByClassName("container")[1];
+        // task.removeChild(task_tool);
+        // finished_task_container.append(task);
+
+        var key = task.getAttribute("data-key");
+        var task_obj = {
+            title: task.childNodes[0].childNodes[0].innerHTML,
+            date: task.childNodes[0].childNodes[1].innerHTML,
+            key: key
+        };
+
+        var updates = {};
+        updates["/finished_task/" + key] = task_obj;
+        firebase.database().ref().update(updates);
+
+        // delete our task from unfinished
+        // task_delete(task);
+        // create_finished_task();
+    }
+
 }

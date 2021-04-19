@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="../src/css/desktop.css" media="(min-width: 1024px)">
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.1/dist/chart.min.js"></script>
 </head>
 
 <body>
@@ -86,13 +88,14 @@
                     pcuerpo de la estadistica
                 </div>
                 <button class="btn-close--modal-statistics" id="close_modal_statistics" type="button">Cerrar</button>
+                <canvas id="myChart" width="200" height="150"></canvas>
             </div>
-
 
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="../src/JS/index.js" type="module"></script>
+    <script src="../src/JS/char.js"></script>
 </body>
 
 </html>
