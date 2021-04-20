@@ -43,13 +43,7 @@ export class DOM {
 
   deleteTask(element) {
     if (element.id === "btn-delete") {
-      // debugger;
-
-      // console.log(element.id);
-
-      // debugger;
       element.parentElement.parentElement.remove();
-      // this.showMessage("Task Deleted Succsssfully", "success");
       const key = element.parentElement.parentElement.getAttribute("data-key");
       var task_to_remove = firebase.database().ref("unfinished_task/" + key);
       task_to_remove.remove();
@@ -57,32 +51,18 @@ export class DOM {
   }
 
   startTimer(element, key, time) {
-    // debugger;
-    // console.log(element);
-    // debugger;
-    // const idTask =
-
     if (element.id === key) {
-      // console.log(element);
-
       const btn = document.getElementById(key);
-      // debugger;
-
-      // debugger;
-      // console.log(btn);
 
       let timeSecond = parseInt(time);
       let timetask = timeSecond * 60;
       const timeH = document.getElementById(`timer-${key}`);
 
       const start = () => {
-        // console.log("click");
-
         displayTime(timetask);
 
         const countDown = setInterval(() => {
           timetask--;
-          // debugger;
           displayTime(timetask);
           if (timetask == 0 || timetask < 1) {
             endCount();
@@ -92,11 +72,8 @@ export class DOM {
 
         function displayTime(second) {
           const hours = Math.floor(second / 3600);
-          // debugger;
           const min = Math.floor((second / 60) % 60);
-          // debugger;
           const sec = Math.floor(second % 60);
-          // debugger;
           timeH.innerHTML = `
             ${hours < 10 ? "0" : ""}${hours}:${min < 10 ? "0" : ""}${min}:${
             sec < 10 ? "0" : ""
@@ -131,35 +108,11 @@ export class DOM {
     }, timeMessageSucces);
   }
 
-  load_tasks() {
-    // const task_array = [];
-    // firebase
-    //   .database()
-    //   .ref("unfinished_task")
-    //   .once("value", function (snapshot) {
-    //     snapshot.forEach(function (childSnapshot) {
-    //       let childKey = childSnapshot.key;
-    //       let childData = childSnapshot.val();
-    //       task_array.push(Object.values(childData));
-    //     });
-    //     for (let i = 0; i < task_array.length; i++) {
-    //       addTask(task_array[i]);
-    //     }
-    //   });
-  }
-
   task_done(element) {
     if (element.id === "btn-finish") {
-      // finished_task_container = document.getElementsByClassName("container")[1];
-      // task.removeChild(task_tool);
-      // finished_task_container.append(task);
-      // console.log(element);
       const key = element.parentElement.parentElement.getAttribute("data-key");
-      // console.log(element.parentElement.parentElement);
       var ref = firebase.database().ref("unfinished_task/" + key);
       ref.once("value").then(function (snapshot) {
-        // var name = snapshot.child("name").val(); // {first:"Ada",last:"Lovelace"}
-        // var firstName = snapshot.child("name/first").val(); // "Ada"
         var status = snapshot.child("status").val();
         var name = snapshot.child("name").val();
         var time = snapshot.child("time").val();

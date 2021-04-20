@@ -92,7 +92,6 @@ document.getElementById("task-form").addEventListener("submit", function (e) {
 
   // Getting Form Values
   const name = document.getElementById("name").value,
-    // status = document.getElementById("status").value,
     status = false,
     time = document.getElementById("time").value,
     description = document.getElementById("description").value;
@@ -123,64 +122,29 @@ document.getElementById("task-list").addEventListener("click", (e) => {
   const dom = new DOM();
   dom.deleteTask(e.target);
   dom.task_done(e.target);
-
-  // console.log(e.target);
-
-  // const key = e.target.parentElement.parentElement.getAttribute("data-key");
-  // var task_to_remove = firebase.database().ref("unfinished_task/" + key);
-  // task_to_remove.remove();
-
-  // e.preventDefault();
 });
+
 //taskdone
 
 document.getElementById("task-list").addEventListener("click", (e) => {
   const taskTime = document.getElementById(`timer-${e.target.id}`);
-  // console.log(taskTime.innerHTML, "que es el time");
 
   const dom = new DOM();
   dom.startTimer(e.target, e.target.id, taskTime.innerHTML);
-  // debugger;
-  // console.log(e, "busco id");
-  // console.log(e.target.value, "busco que es");
-
-  // e.preventDefault();
 });
 
 // //*************************** Drag and Drop  */
 
 const listTask = document.getElementById("task-list");
 
-// console.log(listTask);
-
 Sortable.create(listTask, {
   animation: 150,
   chosenClass: "taskSelect",
   ghostClass: "fantasma",
   dragClass: "drag",
-
-  // onEnd: () => {
-  //   console.log("se cambio el orden");
-  // },
-
-  group: "listask",
-  store: {
-    set: (sortable) => {
-      const orden = sortable.toArray();
-      // console.log(orden);
-      localStorage.setItem(sortable.options.group.name, orden.join("|"));
-    },
-
-    get: (sortable) => {
-      const orden = localStorage.getItem(sortable.options.group.name);
-      return orden ? orden.split("|") : [];
-    },
-  },
 });
 
 function load_tasks() {
-  // task_container = document.getElementById("task-list")[0];
-  // task_container.innerHTML = "";
   const dom = new DOM();
 
   const task_array = [];
@@ -207,83 +171,11 @@ function load_tasks() {
 }
 
 load_tasks();
-// debugger;
 
-// const ctx = document.getElementById('myChart').getContext('2d');
-// const myChart = new Chart(ctx, {
-//     type: 'bar',
-//     data: {
-//         labels: ["Tasks"],
-//         datasets: []
-//     },
-//     options: {
-//         scales: {
-//             yAxes: [{
-//                 ticks: {
-//                     beginAtZero: true
-//                 }
-//             }]
-//         }
-//     }
-// });
-
-// const addData = (chart, label, data) => {
-//     // chart.config.data.datasets.forEach(function(dataset, i) {
-//     //     dataset.data.push({
-//     //         x: label,
-//     //         y: data
-//     //     });
-//     // });
-//     chart.data.labels.push(label);
-//     chart.data.datasets.forEach((dataset, i) => {
-//         dataset.data[0] = (data[0]);
-//     });
-//     chart.update();
-// }
-
-// const removeData = (chart) => {
-//     // chart.data.labels.pop();
-//     // chart.data.labels.pop();
-//     // chart.data.datasets.forEach((dataset) => {
-//     //     dataset.data.pop();
-//     // });
-//     chart.config.data.datasets.forEach(function(dataset) {
-//         dataset.data.pop();
-//         chart.update();
-//     });
-
-// }
-
-// var chartColors = {
-//     red: 'rgb(255, 99, 132)',
-//     orange: 'rgb(255, 159, 64)',
-//     yellow: 'rgb(255, 205, 86)',
-//     green: 'rgb(75, 192, 192)',
-//     blue: 'rgb(54, 162, 235)',
-//     purple: 'rgb(153, 102, 255)',
-//     grey: 'rgb(201, 203, 207)'
-// };
-// var color = Chart.helpers.color;
-// var colorNames = Object.keys(chartColors);
-// const onRefresh = (chart, data, ver) => {
-//     var newColor = chartColors['orange'];
-//     var newDataset = {
-//         label: 'Dataset ' + (ver),
-//         backgroundColor: newColor,
-//         borderColor: chartColors['yellow'],
-//         borderWidth: 1,
-//         data: data
-//     };
-
-//     chart.config.data.datasets.push(newDataset);
-//     chart.update();
-// };
-// let total = 0;
 //************************************** Code Grafic */
 
 const taskFalse = [];
 const taskTrue = [];
-// console.log(taskFalse, taskTrue, "array puro");
 
 firebase
   .database()
@@ -295,25 +187,14 @@ firebase
         taskFalse.push(obj);
       } else {
         taskTrue.push(obj);
-        // debugger;
       }
     }
-    // let fals = taskArrayToNumber(taskFalse);
-    // let trues = taskArrayToNumber(taskTrue);
   });
-// debugger;
 console.log(taskFalse, taskTrue, "array puro");
 
-// var database = firebase.database();
-// var starCountRef = firebase.database().ref("unfinished_task/");
-// starCountRef.on("value", (snapshot) => {
-//   const data = snapshot.val();
-//   // console.log(data, "datos");
-// });
 setTimeout(() => {
   const tareaF = [taskFalse.length];
   const tareaT = [taskTrue.length];
-  // debugger;
   console.log(tareaF, tareaT, "array length");
 
   const tasksCanvas = document.getElementById("myChart");
@@ -331,7 +212,6 @@ setTimeout(() => {
     backgroundColor: "rgba(99, 132, 0, 0.6)",
     borderWidth: 0,
   };
-  // debugger;
   const tasksData = {
     labels: ["Tasks"],
     datasets: [pendingTasksData, doneTasksData],
@@ -355,120 +235,3 @@ setTimeout(() => {
     options: chartOptions,
   });
 }, 2000);
-// const tareaF = [taskFalse.length];
-// const tareaT = [taskTrue.length];
-// // debugger;
-// console.log(tareaF, tareaT, "array length");
-
-// const tasksCanvas = document.getElementById("myChart");
-
-// const pendingTasksData = {
-//   label: "Pending tasks",
-//   data: tareaF,
-//   backgroundColor: "rgba(0, 99, 132, 0.6)",
-//   borderWidth: 0,
-// };
-
-// const doneTasksData = {
-//   label: "Done tasks",
-//   data: tareaT,
-//   backgroundColor: "rgba(99, 132, 0, 0.6)",
-//   borderWidth: 0,
-// };
-// // debugger;
-// const tasksData = {
-//   labels: ["Tasks"],
-//   datasets: [pendingTasksData, doneTasksData],
-// };
-
-// const chartOptions = {
-//   scales: {
-//     yAxes: [
-//       {
-//         ticks: {
-//           beginAtZero: true,
-//         },
-//       },
-//     ],
-//   },
-// };
-
-// const barChart = new Chart(tasksCanvas, {
-//   type: "bar",
-//   data: tasksData,
-//   options: chartOptions,
-// });
-// const pendingTasksData = {
-//   label: "Pending tasks",
-//   data: tareaF,
-//   backgroundColor: "rgba(0, 99, 132, 0.6)",
-//   borderWidth: 0,
-// };
-
-// const doneTasksData = {
-//   label: "Done tasks",
-//   data: tareaT,
-//   backgroundColor: "rgba(99, 132, 0, 0.6)",
-//   borderWidth: 0,
-// };
-// // debugger;
-// const tasksData = {
-//   labels: ["Tasks"],
-//   datasets: [pendingTasksData, doneTasksData],
-// };
-
-// const chartOptions = {
-//   scales: {
-//     yAxes: [
-//       {
-//         ticks: {
-//           beginAtZero: true,
-//         },
-//       },
-//     ],
-//   },
-// };
-
-// const barChart = new Chart(tasksCanvas, {
-//   type: "bar",
-//   data: tasksData,
-//   options: chartOptions,
-// });
-
-// debugger;
-//********************************************* Code Timer */
-
-// const btn = document.querySelector(".btn-start__timer");
-// console.log(btn);
-
-// let timeSecond = 2400;
-// const timeH = document.querySelector("span");
-
-// const start = () => {
-//   console.log("click");
-
-//   displayTime(timeSecond);
-
-//   const countDown = setInterval(() => {
-//     timeSecond--;
-//     displayTime(timeSecond);
-//     if (timeSecond == 0 || timeSecond < 1) {
-//       endCount();
-//       clearInterval(countDown);
-//     }
-//   }, 1000);
-
-//   function displayTime(second) {
-//     const min = Math.floor(second / 60);
-//     const sec = Math.floor(second % 60);
-//     timeH.innerHTML = `
-//   ${min < 10 ? "0" : ""}${min}:${sec < 10 ? "0" : ""}${sec}
-//   `;
-//   }
-
-//   function endCount() {
-//     timeH.innerHTML = "Time out";
-//   }
-// };
-
-// btn.addEventListener("click", start);

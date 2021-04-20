@@ -71,7 +71,6 @@ header {
   font-size: 1.6rem;
 }
 .task-contanier {
-  /*contenedor de las task-cards*/
   max-height: 350px;
 }
 
@@ -190,7 +189,6 @@ header {
   background-color: var(--color-light);
   box-shadow: -3px 2px 20px 0px #d2c3c3;
   border-radius: 20px;
-  /* cursor: move; */
 }
 
 .card-body h4 {
@@ -215,9 +213,6 @@ header {
   font-size: 1.8rem;
   margin-left: 15px;
 }
-/* .btn-start__timer{
-  color: var(--color-dark);
-} */
 
 /* ********* Styles Drag and Drop ****** */
 
