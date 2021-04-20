@@ -144,7 +144,7 @@ header {
   transform: translateY(0%);
 }
 .modal-statistics {
-  display: inline-block;
+  flex-direction: column;
 }
 .modal-close,
 .modal-statistics__close {
@@ -168,7 +168,18 @@ header {
 .head__modal-statistics h4 {
   font-size: 2.4rem;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.card-statistics p {
+  font-size: 1.4rem;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.my-chart {
+  padding: 15px;
 }
 
 .card-body {
@@ -179,7 +190,7 @@ header {
   background-color: var(--color-light);
   box-shadow: -3px 2px 20px 0px #d2c3c3;
   border-radius: 20px;
-  cursor: move;
+  /* cursor: move; */
 }
 
 .card-body h4 {
@@ -253,9 +264,15 @@ header {
   outline: none;
   color: var(--color-light);
 }
+
+.btn-close--modal-statistics {
+  margin: 0 auto;
+}
+
 .btn-primary:hover,
 .btn-close--modal:hover,
-.btn__delete-task:hover {
+.btn__delete-task:hover,
+.btn-close--modal-statistics:hover {
   border: 2px solid var(--color-dark);
   color: var(--color-dark);
   background-color: var(--color-blue-light);

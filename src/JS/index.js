@@ -122,6 +122,7 @@ document.getElementById("task-form").addEventListener("submit", function (e) {
 document.getElementById("task-list").addEventListener("click", (e) => {
   const dom = new DOM();
   dom.deleteTask(e.target);
+  dom.task_done(e.target);
 
   // console.log(e.target);
 
@@ -131,6 +132,8 @@ document.getElementById("task-list").addEventListener("click", (e) => {
 
   // e.preventDefault();
 });
+//taskdone
+
 document.getElementById("task-list").addEventListener("click", (e) => {
   const taskTime = document.getElementById(`timer-${e.target.id}`);
   // console.log(taskTime.innerHTML, "que es el time");
@@ -156,9 +159,9 @@ Sortable.create(listTask, {
   ghostClass: "fantasma",
   dragClass: "drag",
 
-  onEnd: () => {
-    console.log("se cambio el orden");
-  },
+  // onEnd: () => {
+  //   console.log("se cambio el orden");
+  // },
 
   group: "listask",
   store: {
