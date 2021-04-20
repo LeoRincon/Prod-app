@@ -109,7 +109,7 @@ header {
   background-color: var(--color-blue-light);
 }
 
-/********************* Modal ******************/
+/********************* Modal task and statistic******************/
 .modal-cantainer,
 .modal-cantainer__statistics {
   display: flex;
@@ -163,6 +163,12 @@ header {
   font-size: 2.4rem;
   font-weight: 500;
   margin-bottom: 30px;
+}
+
+.head__modal-statistics h4 {
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin-bottom: 20px;
 }
 
 .card-body {
@@ -235,7 +241,8 @@ header {
 }
 
 .btn-primary,
-.btn-close--modal {
+.btn-close--modal,
+.btn-close--modal-statistics {
   width: 90px;
   height: 40px;
   border: none;

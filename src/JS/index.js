@@ -138,42 +138,42 @@ document.getElementById("task-list").addEventListener("click", (e) => {
   const dom = new DOM();
   dom.startTimer(e.target, e.target.id, taskTime.innerHTML);
   // debugger;
-  console.log(e, "busco id");
-  console.log(e.target.value, "busco que es");
+  // console.log(e, "busco id");
+  // console.log(e.target.value, "busco que es");
 
   // e.preventDefault();
 });
 
 // //*************************** Drag and Drop  */
 
-// const listTask = document.getElementById("task-list");
+const listTask = document.getElementById("task-list");
 
-// // console.log(listTask);
+// console.log(listTask);
 
-// Sortable.create(listTask, {
-//   animation: 150,
-//   chosenClass: "taskSelect",
-//   ghostClass: "fantasma",
-//   dragClass: "drag",
+Sortable.create(listTask, {
+  animation: 150,
+  chosenClass: "taskSelect",
+  ghostClass: "fantasma",
+  dragClass: "drag",
 
-//   // onEnd: () => {
-//   //   console.log("se cambio el orden");
-//   // },
+  onEnd: () => {
+    console.log("se cambio el orden");
+  },
 
-//   group: "listask",
-//   store: {
-//     set: (sortable) => {
-//       const orden = sortable.toArray();
-//       // console.log(orden);
-//       localStorage.setItem(sortable.options.group.name, orden.join("|"));
-//     },
+  group: "listask",
+  store: {
+    set: (sortable) => {
+      const orden = sortable.toArray();
+      // console.log(orden);
+      localStorage.setItem(sortable.options.group.name, orden.join("|"));
+    },
 
-//     get: (sortable) => {
-//       const orden = localStorage.getItem(sortable.options.group.name);
-//       return orden ? orden.split("|") : [];
-//     },
-//   },
-// });
+    get: (sortable) => {
+      const orden = localStorage.getItem(sortable.options.group.name);
+      return orden ? orden.split("|") : [];
+    },
+  },
+});
 
 function load_tasks() {
   // task_container = document.getElementById("task-list")[0];
@@ -204,6 +204,7 @@ function load_tasks() {
 }
 
 load_tasks();
+// debugger;
 
 // const ctx = document.getElementById('myChart').getContext('2d');
 // const myChart = new Chart(ctx, {
@@ -275,82 +276,163 @@ load_tasks();
 //     chart.update();
 // };
 // let total = 0;
-// firebase.database().ref('unfinished_task').on('value', (snap) => {
-//     const taskFalse = [];
-//     const taskTrue = [];
-//     let obj = snap.val();
-//     for (const prop in obj) {
-//         if (obj[prop]["status"] === "false") {
-//             taskFalse.push(obj);
-//         } else {
-//             taskTrue.push(obj);
-//         }
-//     }
-//     let fals = taskArrayToNumber(taskFalse);
-//     let trues = taskArrayToNumber(taskTrue);
-// });
-var database = firebase.database();
-var starCountRef = firebase.database().ref("unfinished_task/");
-starCountRef.on("value", (snapshot) => {
-  const data = snapshot.val();
-  console.log(data, "datos");
-});
-database
+//************************************** Code Grafic */
+
+const taskFalse = [];
+const taskTrue = [];
+// console.log(taskFalse, taskTrue, "array puro");
+
+firebase
+  .database()
   .ref("unfinished_task")
-  .get()
-  .then(function (snapshot) {
-    if (snapshot.exists()) {
-      console.log(snapshot.val());
-    } else {
-      console.log("No data available");
+  .on("value", (snap) => {
+    let obj = snap.val();
+    for (const prop in obj) {
+      if (obj[prop]["status"] === false) {
+        taskFalse.push(obj);
+      } else {
+        taskTrue.push(obj);
+        // debugger;
+      }
     }
-  })
-  .catch(function (error) {
-    console.error(error);
+    // let fals = taskArrayToNumber(taskFalse);
+    // let trues = taskArrayToNumber(taskTrue);
   });
-const taskArrayToNumber = (taskArray) => {
-  return taskArray.length;
-};
+// debugger;
+console.log(taskFalse, taskTrue, "array puro");
 
-const tasksCanvas = document.getElementById("myChart");
+// var database = firebase.database();
+// var starCountRef = firebase.database().ref("unfinished_task/");
+// starCountRef.on("value", (snapshot) => {
+//   const data = snapshot.val();
+//   // console.log(data, "datos");
+// });
+setTimeout(() => {
+  const tareaF = [taskFalse.length];
+  const tareaT = [taskTrue.length];
+  // debugger;
+  console.log(tareaF, tareaT, "array length");
 
-var pendingTasksData = {
-  label: "Pending tasks",
-  data: [0],
-  backgroundColor: "rgba(0, 99, 132, 0.6)",
-  borderWidth: 0,
-};
+  const tasksCanvas = document.getElementById("myChart");
 
-var doneTasksData = {
-  label: "Done tasks",
-  data: [0],
-  backgroundColor: "rgba(99, 132, 0, 0.6)",
-  borderWidth: 0,
-};
+  const pendingTasksData = {
+    label: "Pending tasks",
+    data: tareaF,
+    backgroundColor: "rgba(0, 99, 132, 0.6)",
+    borderWidth: 0,
+  };
 
-var tasksData = {
-  labels: ["Tasks"],
-  datasets: [pendingTasksData, doneTasksData],
-};
+  const doneTasksData = {
+    label: "Done tasks",
+    data: tareaT,
+    backgroundColor: "rgba(99, 132, 0, 0.6)",
+    borderWidth: 0,
+  };
+  // debugger;
+  const tasksData = {
+    labels: ["Tasks"],
+    datasets: [pendingTasksData, doneTasksData],
+  };
 
-var chartOptions = {
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
+  const chartOptions = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
         },
-      },
-    ],
-  },
-};
+      ],
+    },
+  };
 
-var barChart = new Chart(tasksCanvas, {
-  type: "bar",
-  data: tasksData,
-  options: chartOptions,
-});
+  const barChart = new Chart(tasksCanvas, {
+    type: "bar",
+    data: tasksData,
+    options: chartOptions,
+  });
+}, 2000);
+// const tareaF = [taskFalse.length];
+// const tareaT = [taskTrue.length];
+// // debugger;
+// console.log(tareaF, tareaT, "array length");
 
+// const tasksCanvas = document.getElementById("myChart");
+
+// const pendingTasksData = {
+//   label: "Pending tasks",
+//   data: tareaF,
+//   backgroundColor: "rgba(0, 99, 132, 0.6)",
+//   borderWidth: 0,
+// };
+
+// const doneTasksData = {
+//   label: "Done tasks",
+//   data: tareaT,
+//   backgroundColor: "rgba(99, 132, 0, 0.6)",
+//   borderWidth: 0,
+// };
+// // debugger;
+// const tasksData = {
+//   labels: ["Tasks"],
+//   datasets: [pendingTasksData, doneTasksData],
+// };
+
+// const chartOptions = {
+//   scales: {
+//     yAxes: [
+//       {
+//         ticks: {
+//           beginAtZero: true,
+//         },
+//       },
+//     ],
+//   },
+// };
+
+// const barChart = new Chart(tasksCanvas, {
+//   type: "bar",
+//   data: tasksData,
+//   options: chartOptions,
+// });
+// const pendingTasksData = {
+//   label: "Pending tasks",
+//   data: tareaF,
+//   backgroundColor: "rgba(0, 99, 132, 0.6)",
+//   borderWidth: 0,
+// };
+
+// const doneTasksData = {
+//   label: "Done tasks",
+//   data: tareaT,
+//   backgroundColor: "rgba(99, 132, 0, 0.6)",
+//   borderWidth: 0,
+// };
+// // debugger;
+// const tasksData = {
+//   labels: ["Tasks"],
+//   datasets: [pendingTasksData, doneTasksData],
+// };
+
+// const chartOptions = {
+//   scales: {
+//     yAxes: [
+//       {
+//         ticks: {
+//           beginAtZero: true,
+//         },
+//       },
+//     ],
+//   },
+// };
+
+// const barChart = new Chart(tasksCanvas, {
+//   type: "bar",
+//   data: tasksData,
+//   options: chartOptions,
+// });
+
+// debugger;
 //********************************************* Code Timer */
 
 // const btn = document.querySelector(".btn-start__timer");

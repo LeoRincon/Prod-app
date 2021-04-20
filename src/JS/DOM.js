@@ -116,20 +116,20 @@ export class DOM {
   }
 
   load_tasks() {
-    const task_array = [];
-    firebase
-      .database()
-      .ref("unfinished_task")
-      .once("value", function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-          let childKey = childSnapshot.key;
-          let childData = childSnapshot.val();
-          task_array.push(Object.values(childData));
-        });
-        for (let i = 0; i < task_array.length; i++) {
-          addTask(task_array[i]);
-        }
-      });
+    // const task_array = [];
+    // firebase
+    //   .database()
+    //   .ref("unfinished_task")
+    //   .once("value", function (snapshot) {
+    //     snapshot.forEach(function (childSnapshot) {
+    //       let childKey = childSnapshot.key;
+    //       let childData = childSnapshot.val();
+    //       task_array.push(Object.values(childData));
+    //     });
+    //     for (let i = 0; i < task_array.length; i++) {
+    //       addTask(task_array[i]);
+    //     }
+    //   });
   }
 
   task_done(task, task_tool) {
