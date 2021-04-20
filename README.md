@@ -6,7 +6,7 @@ Web application that allows you to manage your daily tasks, in an easy and pract
 
 ## Getting Started
 
-You can use it in link
+You can use it in link https://leorincon.github.io/Prod-app/public/index?
 
 ### Prerequisites
 
