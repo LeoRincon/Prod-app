@@ -89,11 +89,10 @@ window.addEventListener("click", (e) => {
 // DOM Events
 document.getElementById("task-form").addEventListener("submit", function (e) {
   // Override the default Form behaviour
-  // e.preventDefault();
 
   // Getting Form Values
   const name = document.getElementById("name").value,
-    status = document.getElementById("status").value,
+    status = false,
     time = document.getElementById("time").value,
     description = document.getElementById("description").value;
 
@@ -102,9 +101,9 @@ document.getElementById("task-form").addEventListener("submit", function (e) {
 
   // Input User Validation
   if (name === "" || status === "" || time === "" || description === "") {
+    e.preventDefault();
     return dom.showMessage("Please Insert data in all fields", "danger");
   }
-
   // Save Task
 
   let key = firebase.database().ref().child("unfinished_task").push().key;
@@ -122,49 +121,30 @@ document.getElementById("task-form").addEventListener("submit", function (e) {
 document.getElementById("task-list").addEventListener("click", (e) => {
   const dom = new DOM();
   dom.deleteTask(e.target);
-  // console.log(e);
-
-  const key = e.target.parentElement.parentElement.getAttribute("data-key");
-  var task_to_remove = firebase.database().ref("unfinished_task/" + key);
-  task_to_remove.remove();
-
-  // e.preventDefault();
+  dom.task_done(e.target);
 });
 
-//*************************** Drag and Drop  */
+//taskdone
+
+document.getElementById("task-list").addEventListener("click", (e) => {
+  const taskTime = document.getElementById(`timer-${e.target.id}`);
+
+  const dom = new DOM();
+  dom.startTimer(e.target, e.target.id, taskTime.innerHTML);
+});
+
+// //*************************** Drag and Drop  */
 
 const listTask = document.getElementById("task-list");
-
-// console.log(listTask);
 
 Sortable.create(listTask, {
   animation: 150,
   chosenClass: "taskSelect",
   ghostClass: "fantasma",
   dragClass: "drag",
-
-  // onEnd: () => {
-  //   console.log("se cambio el orden");
-  // },
-
-  group: "listask",
-  store: {
-    set: (sortable) => {
-      const orden = sortable.toArray();
-      // console.log(orden);
-      localStorage.setItem(sortable.options.group.name, orden.join("|"));
-    },
-
-    get: (sortable) => {
-      const orden = localStorage.getItem(sortable.options.group.name);
-      return orden ? orden.split("|") : [];
-    },
-  },
 });
 
 function load_tasks() {
-  // task_container = document.getElementById("task-list")[0];
-  // task_container.innerHTML = "";
   const dom = new DOM();
 
   const task_array = [];
@@ -191,3 +171,67 @@ function load_tasks() {
 }
 
 load_tasks();
+
+//************************************** Code Grafic */
+
+const taskFalse = [];
+const taskTrue = [];
+
+firebase
+  .database()
+  .ref("unfinished_task")
+  .on("value", (snap) => {
+    let obj = snap.val();
+    for (const prop in obj) {
+      if (obj[prop]["status"] === false) {
+        taskFalse.push(obj);
+      } else {
+        taskTrue.push(obj);
+      }
+    }
+  });
+console.log(taskFalse, taskTrue, "array puro");
+
+setTimeout(() => {
+  const tareaF = [taskFalse.length];
+  const tareaT = [taskTrue.length];
+  console.log(tareaF, tareaT, "array length");
+
+  const tasksCanvas = document.getElementById("myChart");
+
+  const pendingTasksData = {
+    label: "Pending tasks",
+    data: tareaF,
+    backgroundColor: "rgba(0, 99, 132, 0.6)",
+    borderWidth: 0,
+  };
+
+  const doneTasksData = {
+    label: "Done tasks",
+    data: tareaT,
+    backgroundColor: "rgba(99, 132, 0, 0.6)",
+    borderWidth: 0,
+  };
+  const tasksData = {
+    labels: ["Tasks"],
+    datasets: [pendingTasksData, doneTasksData],
+  };
+
+  const chartOptions = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
+  };
+
+  const barChart = new Chart(tasksCanvas, {
+    type: "bar",
+    data: tasksData,
+    options: chartOptions,
+  });
+}, 2000);

@@ -71,7 +71,6 @@ header {
   font-size: 1.6rem;
 }
 .task-contanier {
-  /*contenedor de las task-cards*/
   max-height: 350px;
 }
 
@@ -109,7 +108,7 @@ header {
   background-color: var(--color-blue-light);
 }
 
-/********************* Modal ******************/
+/********************* Modal task and statistic******************/
 .modal-cantainer,
 .modal-cantainer__statistics {
   display: flex;
@@ -144,7 +143,7 @@ header {
   transform: translateY(0%);
 }
 .modal-statistics {
-  display: inline-block;
+  flex-direction: column;
 }
 .modal-close,
 .modal-statistics__close {
@@ -165,6 +164,23 @@ header {
   margin-bottom: 30px;
 }
 
+.head__modal-statistics h4 {
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.card-statistics p {
+  font-size: 1.4rem;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.my-chart {
+  padding: 15px;
+}
+
 .card-body {
   width: 90%;
   height: 90%;
@@ -173,7 +189,6 @@ header {
   background-color: var(--color-light);
   box-shadow: -3px 2px 20px 0px #d2c3c3;
   border-radius: 20px;
-  cursor: move;
 }
 
 .card-body h4 {
@@ -184,13 +199,21 @@ header {
   font-size: 1.6rem;
 }
 
-.icons-task {
+.icons-task,
+.btn-start__timer {
   font-size: 1.6rem;
   color: var(--color-dark);
-  margin-left: 25px;
+  margin-left: 18px;
   text-align: center;
   margin-top: 10px;
 }
+
+.timer,
+.btn-start__timer {
+  font-size: 1.8rem;
+  margin-left: 15px;
+}
+
 /* ********* Styles Drag and Drop ****** */
 
 .task-list--wrap {
@@ -224,7 +247,8 @@ header {
 }
 
 .btn-primary,
-.btn-close--modal {
+.btn-close--modal,
+.btn-close--modal-statistics {
   width: 90px;
   height: 40px;
   border: none;
@@ -235,9 +259,15 @@ header {
   outline: none;
   color: var(--color-light);
 }
+
+.btn-close--modal-statistics {
+  margin: 0 auto;
+}
+
 .btn-primary:hover,
 .btn-close--modal:hover,
-.btn__delete-task:hover {
+.btn__delete-task:hover,
+.btn-close--modal-statistics:hover {
   border: 2px solid var(--color-dark);
   color: var(--color-dark);
   background-color: var(--color-blue-light);
