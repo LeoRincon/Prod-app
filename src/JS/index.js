@@ -122,6 +122,7 @@ document.getElementById("task-form").addEventListener("submit", function(e) {
 document.getElementById("task-list").addEventListener("click", (e) => {
     const dom = new DOM();
     dom.deleteTask(e.target);
+    dom.task_done(e.target);
     console.log(e.target);
 
     // const key = e.target.parentElement.parentElement.getAttribute("data-key");
@@ -189,7 +190,6 @@ function load_tasks() {
             }
         });
 }
-
 load_tasks();
 
 // const ctx = document.getElementById('myChart').getContext('2d');
@@ -276,26 +276,44 @@ load_tasks();
 //     let fals = taskArrayToNumber(taskFalse);
 //     let trues = taskArrayToNumber(taskTrue);
 // });
-var database = firebase.database();
-var starCountRef = firebase.database().ref('unfinished_task/');
-starCountRef.on('value', (snapshot) => {
-    const data = snapshot.val();
-    console.log(data);
-});
-database.ref('unfinished_task').get().then(function(snapshot) {
-    if (snapshot.exists()) {
-        console.log(snapshot.val());
-    } else {
-        console.log("No data available");
-    }
-}).catch(function(error) {
-    console.error(error);
-});
+// var database = firebase.database();
+// var starCountRef = firebase.database().ref('unfinished_task/');
+// starCountRef.on('value', (snapshot) => {
+//     const data = snapshot.val();
+// });
+// database.ref('unfinished_task').get().then(function(snapshot) {
+//     if (snapshot.exists()) {
+//         console.log(snapshot.val());
+//     } else {
+//         console.log("No data available");
+//     }
+// }).catch(function(error) {
+//     console.error(error);
+// });
 const taskArrayToNumber = (taskArray) => {
     return taskArray.length
 }
 
+// const taskTrue = [];
 
+
+// // const llamado = () => {
+// var vol = 0;
+// firebase.database().ref('unfinished_task').on('value', (snap) => {
+//     let obj = snap.val();
+//     for (const prop in obj) {
+//         if (obj[prop]["status"] === false) {
+//             // taskFalse.push(obj);
+//             taskFalse++
+//             vol = taskFalse
+//         } else {
+//             taskTrue.push(obj);
+//         }
+//     }
+//     // let fals = taskArrayToNumber(taskFalse);
+//     // let trues = taskArrayToNumber(taskTrue);
+//     // return fals;
+// });
 const tasksCanvas = document.getElementById("myChart");
 
 var pendingTasksData = {
@@ -307,7 +325,7 @@ var pendingTasksData = {
 
 var doneTasksData = {
     label: 'Done tasks',
-    data: [0],
+    data: [],
     backgroundColor: 'rgba(99, 132, 0, 0.6)',
     borderWidth: 0,
 };
